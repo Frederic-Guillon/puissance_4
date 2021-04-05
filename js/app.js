@@ -18,7 +18,7 @@ const app = {
         elements = document.getElementsByClassName('column');
         //console.log(elements);            
             
-        for (element of elements) {
+        for (let element of elements) {
             element.addEventListener("click",app.handleClickColumn);
         }
     },
@@ -53,7 +53,7 @@ const app = {
     displayGrid : function() {
         console.log(app.grid);
         
-        for (rowIndex in app.grid) {
+        for (let rowIndex in app.grid) {
             app.displayLine(rowIndex);
         }
     },
@@ -235,6 +235,6 @@ const app = {
         return (repeat >= 4);
     }
 
-}
+};
 
 document.addEventListener('DOMContentLoaded', app.init);
