@@ -13,26 +13,18 @@ const app = {
             ['','','','','','',''], 
         ];
 
-       
-
         app.displayGrid();
 
         elements = document.getElementsByClassName('column');
-        console.log(elements);            
+        //console.log(elements);            
             
         for (element of elements) {
             element.addEventListener("click",app.handleClickColumn);
         }
-
-        
-
-
-
-
     },
 
     displayLine : function(num_column) {
-        console.log(num_column);
+        //console.log("num_column: " + num_column);
 
         divRow = document.createElement("div");
         divRow.classList.add("row");
@@ -53,8 +45,6 @@ const app = {
             if (num_column == 0) {
                 divEl.classList.add("column");
                 divEl.setAttribute('rel', num++);
-
-
             }
         }    
     },
@@ -70,7 +60,7 @@ const app = {
 
     handleClickColumn : function() {
         let num_column = this.getAttribute('rel');
-        console.log(num_column);
+        console.log("num_column: " + num_column);
         let num_line = 5;
         //tant que la cellule sélectionné n'est pas vide et 
         //que le numéro de la ligne est supérieur à zéro alors :
@@ -113,30 +103,136 @@ const app = {
         //ET qu'on a pas atteint le bord de la grille du puissance 4 alors :
 
         //sur la droite
-        
         do {
-            repeat++;
             valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
-            num_column++;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
             console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
             console.log("repeat: " + repeat + " while 1");
-        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_column < 7 )
+            num_column++;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_column < 7 );
         
         //sur la gauche
         num_line = num_line_origin;
         num_column = num_column_origin;
         console.log("num_line:" + num_line);
         console.log("num_column:" + num_column);
-        if (repeat < 4) repeat--;
+        if (repeat < 4) {
+            repeat--;
+        } else {
+            return (repeat >= 4);
+        }
         do {
-            repeat++;
             valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
-            num_column--;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
             console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
             console.log("repeat: " + repeat + " while 2");
-        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_column >= 0 )
+            num_column--;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_column >= 0 );
 
-        return (repeat == 4);
+        
+        repeat = 0;
+        //vers le bas
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
+        do {
+            valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
+            console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
+            console.log("repeat: " + repeat + " while 3");
+            num_line++;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line < 6 );
+
+        repeat = 0;
+        //diagonale haut gauche
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
+        do {
+            valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
+            console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
+            console.log("repeat: " + repeat + " while 4");
+            num_line--;
+            num_column--;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line >= 0 && num_column >= 0);
+
+        //diagonale bas droite
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
+        if (repeat < 4) {
+            repeat--;
+        } else {
+            return (repeat >= 4);
+        }
+        do {
+            valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
+            console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
+            console.log("repeat: " + repeat + " while 5");
+            num_line++;
+            num_column++;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line < 6 && num_column < 7);
+        
+        
+        
+        //diagonale bas gauche
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
+        if (repeat < 4) {
+            repeat = 0;
+        } else {
+            return (repeat >= 4);
+        }
+        do {
+            valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
+            console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
+            console.log("repeat: " + repeat + " while 6");
+            num_line++;
+            num_column--;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line < 6 && num_column >= 0);
+
+        if (repeat < 4) {
+            repeat--;
+        } else {
+            return (repeat >= 4);
+        }
+        //diagonale haut droite
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
+        do {
+            valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
+            if (valueCellCurrentPlayer == app.currentPlayer) {
+                repeat++;
+            }
+            console.log("position: " + num_line + "," + num_column + " valeur: " + valueCellCurrentPlayer);
+            console.log("repeat: " + repeat + " while 7");
+            num_line--;
+            num_column++;
+        } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line >= 0 && num_column < 7);
+
+        return (repeat >= 4);
     }
 
 }
