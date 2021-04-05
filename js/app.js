@@ -134,7 +134,11 @@ const app = {
         } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_column >= 0 );
 
         
-        repeat = 0;
+        if (repeat < 4) {
+            repeat = 0;
+        } else {
+            return (repeat >= 4);
+        }
         //vers le bas
         num_line = num_line_origin;
         num_column = num_column_origin;
@@ -150,7 +154,11 @@ const app = {
             num_line++;
         } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line < 6 );
 
-        repeat = 0;
+        if (repeat < 4) {
+            repeat = 0;
+        } else {
+            return (repeat >= 4);
+        }
         //diagonale haut gauche
         num_line = num_line_origin;
         num_column = num_column_origin;
@@ -167,16 +175,16 @@ const app = {
             num_column--;
         } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line >= 0 && num_column >= 0);
 
-        //diagonale bas droite
-        num_line = num_line_origin;
-        num_column = num_column_origin;
-        console.log("num_line:" + num_line);
-        console.log("num_column:" + num_column);
         if (repeat < 4) {
             repeat--;
         } else {
             return (repeat >= 4);
         }
+        //diagonale bas droite
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
         do {
             valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
             if (valueCellCurrentPlayer == app.currentPlayer) {
@@ -188,18 +196,16 @@ const app = {
             num_column++;
         } while (repeat < 4 && valueCellCurrentPlayer == app.currentPlayer && num_line < 6 && num_column < 7);
         
-        
-        
-        //diagonale bas gauche
-        num_line = num_line_origin;
-        num_column = num_column_origin;
-        console.log("num_line:" + num_line);
-        console.log("num_column:" + num_column);
         if (repeat < 4) {
             repeat = 0;
         } else {
             return (repeat >= 4);
         }
+        //diagonale bas gauche
+        num_line = num_line_origin;
+        num_column = num_column_origin;
+        console.log("num_line:" + num_line);
+        console.log("num_column:" + num_column);
         do {
             valueCellCurrentPlayer = document.querySelector(".position_" + num_line + "_" + num_column).innerHTML;
             if (valueCellCurrentPlayer == app.currentPlayer) {
