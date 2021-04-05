@@ -76,6 +76,10 @@ const app = {
             if (app.grid[num_line][num_column] == "") {
                 app.grid[num_line][num_column] = app.currentPlayer;
                 document.querySelector(".position_" + num_line + "_" + num_column).textContent = app.currentPlayer;
+                for (let i = 0; i < app.grid.length; i++) {
+                    console.log(app.grid[i]);
+                }
+
                 //on regarde si on a un gagnant
                 app.winner = app.detectWinner(num_line, num_column);
                 if (app.winner) {
